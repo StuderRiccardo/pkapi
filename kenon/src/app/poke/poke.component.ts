@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Pokemon } from '../son.model';
 import { AppComponent } from '../app.component';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-poke',
@@ -11,10 +11,11 @@ import { Observable } from 'rxjs';
 })
 export class PokeComponent {
   routeObs!:Observable<ParamMap>
-  poke : any
-  obs!: Observable<object>
+  poke !: any
+  obs!: Observable<any>  
   constructor(private router:ActivatedRoute,
-              private app:AppComponent){
+              private app:AppComponent, 
+              private http: HttpClient){
 
   }
   ngOnInit(): void {
@@ -25,9 +26,10 @@ export class PokeComponent {
   }
 
   getRouteParams=(params:ParamMap)=>{
-    let pok = params.get('path')
-    if(pok!=null){
-        this.obs = this.app.getlastpart(pok)
+    let pok = params.get('id')
+    if(pok != null){
+        this.obs = this.http.get("https://pokeapi.co/api/v2/type/"+pok)
+        this.obs.subscribe((data:any)=>this.poke=data)
     }
     
   }

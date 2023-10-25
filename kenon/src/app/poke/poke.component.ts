@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { AppComponent } from '../app.component';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Pokemon,Pok } from './pok.model';
 
 @Component({
   selector: 'app-poke',
@@ -11,10 +11,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PokeComponent {
   routeObs!:Observable<ParamMap>
-  poke !: any
+  poke !: Pok
   obs!: Observable<any>  
   constructor(private router:ActivatedRoute,
-              private app:AppComponent, 
               private http: HttpClient){
 
   }

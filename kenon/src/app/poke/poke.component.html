@@ -1,6 +1,7 @@
-<div *ngFor="let name of poke.pokemon">
-    {{name.pokemon.name}}
+<hr>
+<div *ngFor="let name of poke.pokemon" class="">
+    <a routerLink="/mon/{{name.pokemon.name}}">{{name.pokemon.name}}</a>
 </div>
-
+<router-outlet></router-outlet>
 
 
